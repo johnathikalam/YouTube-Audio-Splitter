@@ -22,9 +22,11 @@ def download_audio(url: str, temp_dir: str = "temp") -> tuple[str, str, dict]:
         'nocheckcertificate': True,
         'extractor_args': {
             'youtube': {
-                'player_client': ['android', 'web', 'mweb']
+                'player_client': ['android', 'ios', 'tv_embedded']
             }
-        }
+        },
+        # Uses cookies.txt if uploaded to your Colab directory
+        'cookiefile': 'cookies.txt' if os.path.exists('cookies.txt') else None
     }
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
