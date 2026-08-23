@@ -40,6 +40,8 @@ The recommended architecture is:
 5. Environment Variables:
    - Add variable name: `VITE_API_URL`
    - Value: `https://yt-audio-splitter-api.onrender.com` (Your backend URL from Step 1)
+   - Do not include a trailing `/`.
+   - This variable is embedded during the Vite build, so redeploy Pages after adding or changing it.
 6. Click **Save and Deploy**.
 
 Your app is now live on Cloudflare Pages (e.g. `https://yt-audio-splitter.pages.dev`)!

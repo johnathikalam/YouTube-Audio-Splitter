@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Music, Video, Download, Scissors, CheckCircle, AlertCircle, Loader2, FolderArchive, FileAudio } from 'lucide-react';
 import './App.css';
 
-const API_BASE = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+const configuredApiUrl = import.meta.env.VITE_API_URL?.trim();
+const API_BASE = configuredApiUrl ? configuredApiUrl.replace(/\/$/, '') : '';
 
 const DEFAULT_TRACKLIST = `Girls Like You by Maroon 5 (0:07 - 3:55)
 Let Her Go by Passenger (4:02 - 7:28)`;
@@ -28,6 +29,10 @@ export default function App() {
     setStatusMessage('Downloading audio and parsing tracks from YouTube...');
 
     try {
+      if (!API_BASE) {
+        throw new Error('The backend URL is not configured. Set VITE_API_URL in Cloudflare Pages and redeploy the frontend.');
+      }
+
       const response = await fetch(`${API_BASE}/api/split`, {
         method: 'POST',
         headers: {
@@ -48,7 +53,12 @@ export default function App() {
       setResult(data);
       setStatusMessage('');
     } catch (err) {
-      setError(err.message || 'An unexpected error occurred while processing.');
+      console.error(`Fetch error targeting API [${API_BASE}]:`, err);
+      if (err.name === 'TypeError' && err.message === 'Failed to fetch') {
+        setError(`Failed to connect to backend server at [${API_BASE}]. Please verify your VITE_API_URL environment variable in Cloudflare settings or check if your Render backend is awake.`);
+      } else {
+        setError(err.message || 'An unexpected error occurred while processing.');
+      }
     } finally {
       setLoading(false);
     }
