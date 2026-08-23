@@ -1,0 +1,7 @@
+yt-dlp
+youtube-transcript-api
+pydub
+audioop-lts
+fastapi
+uvicorn
+python-multipart
