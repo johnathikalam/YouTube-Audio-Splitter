@@ -19,6 +19,12 @@ def download_audio(url: str, temp_dir: str = "temp") -> tuple[str, str, dict]:
         'outtmpl': os.path.join(temp_dir, '%(id)s.%(ext)s'),
         'quiet': True,
         'no_warnings': True,
+        'nocheckcertificate': True,
+        'extractor_args': {
+            'youtube': {
+                'player_client': ['android', 'web', 'mweb']
+            }
+        }
     }
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
