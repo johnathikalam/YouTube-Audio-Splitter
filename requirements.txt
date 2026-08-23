@@ -1,7 +1,7 @@
 yt-dlp
 youtube-transcript-api
 pydub
-audioop-lts
+audioop-lts; python_version >= '3.13'
 fastapi
 uvicorn
 python-multipart
