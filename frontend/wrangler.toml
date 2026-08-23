@@ -1,2 +1,7 @@
+name = "youtube-audio-splitter"
+compatibility_date = "2026-08-20"
+
+[assets]
+directory = "./dist"
 [vars]
 VITE_API_URL = "https://my-custom-splitter-api.loca.lt/"
