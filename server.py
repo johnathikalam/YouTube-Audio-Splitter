@@ -24,7 +24,7 @@ app = FastAPI(title="YouTube Audio Splitter API (Ephemeral Storage)")
 # Enable CORS for React UI
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["https://youtube-audio-splitter.johnathikalam3.workers.dev"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
