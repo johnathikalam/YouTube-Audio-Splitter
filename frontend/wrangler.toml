@@ -1,0 +1,2 @@
+[vars]
+VITE_API_URL = "https://my-custom-splitter-api.loca.lt/"
